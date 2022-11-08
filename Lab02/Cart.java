@@ -16,7 +16,7 @@ public class Cart {
     }
 
     public void removeDigitalVideoDisc(DigitalVideoDisc disc){
-        if (itemsOrdered.length == 0){
+        if (this.index == 0){
             System.out.println("The cart is empty");
             return;
         } else {
