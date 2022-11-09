@@ -1,4 +1,4 @@
-package Lab01;
+
 public class SecondDegreeOneVariableEquation {
   private double a;
   private double b;

@@ -1,17 +1,17 @@
-package Lab01;
 
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ArraySortWithAvgAndSum {
     private List<Integer> arr;
-    private int size;
 
     public ArraySortWithAvgAndSum (List<Integer> initArray) {
         this.arr = initArray;
     }
     public ArraySortWithAvgAndSum(){
-        this.arr = new List<Integer>;
+        this.arr = new ArrayList<Integer>();
     }
 
     public void add(int addNum){

@@ -1,4 +1,4 @@
-package Lab01;
+
 
 import java.util.Scanner;
 
@@ -20,5 +20,6 @@ public class AddTwoMatricesSameSize {
             result[i] = arr1[i] + arr2[i];
         }
         System.out.println(result.toString());
+        keyboard.close();
     }
 }

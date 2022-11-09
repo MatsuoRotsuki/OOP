@@ -1,4 +1,4 @@
-package Lab01;
+
 
 public class EquationSolve {
   public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class EquationSolve {
     //secondEquation.solve();
     firstEquation.setA(6);
     double result = firstEquation.solve();
-    //System.out.println(result);
+    System.out.println(result);
     SecondDegreeOneVariableEquation thirdEquation = new SecondDegreeOneVariableEquation(3, -4, 1);
     thirdEquation.solve();
   }

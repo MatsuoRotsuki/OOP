@@ -1,4 +1,4 @@
-package Lab01;
+
 public class FirstDegreeTwoVariablesEquation {
   private double a11, a12, a21, a22;
   private double b1, b2;

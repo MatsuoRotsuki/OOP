@@ -1,4 +1,4 @@
-package Lab01;
+
 
 import java.util.Scanner;
 
@@ -64,5 +64,6 @@ public class NumOfDaysOfMonth {
         }
 
         System.out.println("Number of days of " + fullNameMonths[month] + ": " + daysResult);
+        keyboard.close();
     }
 }
