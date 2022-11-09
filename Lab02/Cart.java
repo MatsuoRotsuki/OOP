@@ -1,42 +1,34 @@
 package Lab02;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
-    private int index = 0;
-    private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
+    private List<DigitalVideoDisc> itemsOrdered = new ArrayList<>();
     public void addDigitalVideoDisc(DigitalVideoDisc disc){
-        if (this.index == MAX_NUMBERS_ORDERED - 1){
+        if (this.itemsOrdered.size() >= MAX_NUMBERS_ORDERED){
             System.out.println("The cart is almost full");
-            return;
         } else {
-            itemsOrdered[this.index] = disc;
-            this.index++;
-            System.out.println("The disc has been added");
+            System.out.println("Add disc into the cart successfully");
+            this.itemsOrdered.add(disc);
         }
     }
 
     public void removeDigitalVideoDisc(DigitalVideoDisc disc){
-        if (this.index == 0){
-            System.out.println("The cart is empty");
-            return;
+        int index = this.itemsOrdered.indexOf(disc);
+        if (index >= 0){
+            this.itemsOrdered.remove(disc);
+            System.out.println("Item removed successfully");
         } else {
-            int i;
-            for (i = 0; i < this.index; i++){
-                if (itemsOrdered[i].equals(disc)){
-                    break;
-                }
-            }
-            for (int j = i; j < index-1; i++){
-                itemsOrdered[i] = itemsOrdered[i+1];
-            }
-            this.index--;
+            System.out.println("Item not found");
         }
     }
 
     public float totalCost(){
         float sum = 0;
-        for (int i = 0; i < this.index; i++){
-            sum += itemsOrdered[i].getCost();
+        for (DigitalVideoDisc disc : itemsOrdered){
+            sum += disc.getCost();
         }
         return sum;
     }
