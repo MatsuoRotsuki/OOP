@@ -51,4 +51,14 @@ public class Cart {
         }
         return sum;
     }
+
+    public void printCart() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
+        for (DigitalVideoDisc disc : itemsOrdered) {
+            System.out.println(disc.toString());
+        }
+        System.out.println("Total cost: " + this.totalCost());
+        System.out.println("***************************************************");
+    }
 }
