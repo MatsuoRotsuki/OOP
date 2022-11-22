@@ -15,6 +15,25 @@ public class Cart {
         }
     }
 
+    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList){
+        if (itemsOrdered.size() + dvdList.length >= MAX_NUMBERS_ORDERED){
+            System.out.println("Cannot add because there's no space");
+        } else {
+            for (DigitalVideoDisc disc : dvdList){
+                this.addDigitalVideoDisc(disc);
+            }
+        }
+    }
+
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        if (itemsOrdered.size() <= MAX_NUMBERS_ORDERED - 2) {
+            System.out.println("Cannot add because there's no space");
+        } else {
+            this.addDigitalVideoDisc(dvd1);
+            this.addDigitalVideoDisc(dvd2);
+        }
+    }
+
     public void removeDigitalVideoDisc(DigitalVideoDisc disc){
         int index = this.itemsOrdered.indexOf(disc);
         if (index >= 0){
