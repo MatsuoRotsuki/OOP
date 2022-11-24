@@ -61,4 +61,42 @@ public class Cart {
         System.out.println("Total cost: " + this.totalCost());
         System.out.println("***************************************************");
     }
+
+    public void searchCart(int id) {
+        List<DigitalVideoDisc> result = new ArrayList<DigitalVideoDisc>();
+
+        for (DigitalVideoDisc disc : this.itemsOrdered) {
+            if (disc.isMatch(id)) {
+                result.add(disc);
+            }
+        }
+        if (result.size() > 0) {
+            System.out.println("Search results:");
+            for (DigitalVideoDisc disc: result) {
+                System.out.println(disc.toString());
+            }
+            System.out.println();
+        } else {
+            System.out.println("Item not found.");
+        }
+    }
+
+    public void searchCart(String title) {
+        List<DigitalVideoDisc> result = new ArrayList<DigitalVideoDisc>();
+
+        for (DigitalVideoDisc disc : this.itemsOrdered) {
+            if (disc.isMatch(title)) {
+                result.add(disc);
+            }
+        }
+        if (result.size() > 0) {
+            System.out.println("Search results:");
+            for (DigitalVideoDisc disc: result) {
+                System.out.println(disc.toString());
+            }
+            System.out.println();
+        } else {
+            System.out.println("Item not found.");
+        }
+    }
 }
