@@ -69,4 +69,14 @@ public class DigitalVideoDisc {
     public String toString() {
         return this.id + ". DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getLength() + ": " + this.getCost() + "$";
     }
+
+    public boolean isMatch(String title) {
+        if (this.title.equals(title)) return true;
+        return false;
+    }
+
+    public boolean isMatch(int id) {
+        if  (this.id == id) return true;
+        return false;
+    }
 }
