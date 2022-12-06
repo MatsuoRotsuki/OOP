@@ -1,38 +1,39 @@
-package AimsProject.src.hust.soict.dsai.aims.cart;
+package hust.soict.dsai.aims.cart;
 
-import AimsProject.src.hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
-    private List<DigitalVideoDisc> itemsOrdered = new ArrayList<>();
-    public void addDigitalVideoDisc(DigitalVideoDisc disc){
+    private List<Media> itemsOrdered = new ArrayList<>();
+    public void addMedia(Media media){
         if (this.itemsOrdered.size() >= MAX_NUMBERS_ORDERED){
             System.out.println("The cart is almost full");
         } else {
             System.out.println("Add disc into the cart successfully");
-            this.itemsOrdered.add(disc);
+            this.itemsOrdered.add(media);
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList){
-        if (itemsOrdered.size() + dvdList.length >= MAX_NUMBERS_ORDERED){
+    public void addMedia(Media[] mediaList){
+        if (itemsOrdered.size() + mediaList.length >= MAX_NUMBERS_ORDERED){
             System.out.println("Cannot add because there's no space");
         } else {
-            for (DigitalVideoDisc disc : dvdList){
-                this.addDigitalVideoDisc(disc);
+            for (Media media : mediaList){
+                this.addMedia(media);
             }
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    public void addDigitalVideoDisc(Media media1, Media media2) {
         if (itemsOrdered.size() <= MAX_NUMBERS_ORDERED - 2) {
             System.out.println("Cannot add because there's no space");
         } else {
-            this.addDigitalVideoDisc(dvd1);
-            this.addDigitalVideoDisc(dvd2);
+            this.addMedia(media1);
+            this.addMedia(media2);
         }
     }
 
@@ -48,8 +49,8 @@ public class Cart {
 
     public float totalCost(){
         float sum = 0;
-        for (DigitalVideoDisc disc : itemsOrdered){
-            sum += disc.getCost();
+        for (Media media : itemsOrdered){
+            sum += media.getCost();
         }
         return sum;
     }
@@ -57,8 +58,8 @@ public class Cart {
     public void printCart() {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
-        for (DigitalVideoDisc disc : itemsOrdered) {
-            System.out.println(disc.toString());
+        for (Media media : itemsOrdered) {
+            System.out.println(media.toString());
         }
         System.out.println("Total cost: " + this.totalCost());
         System.out.println("***************************************************");

@@ -1,37 +1,11 @@
-package AimsProject.src.hust.soict.dsai.aims.disc;
+package hust.soict.dsai.aims.disc;
 
-public class DigitalVideoDisc {
-    private String title;
-    private String category;
-    private String director;
-    private int length;
-    private float cost;
+import hust.soict.dsai.aims.media.Disc;
+import hust.soict.dsai.aims.media.Playable;
+
+public class DigitalVideoDisc extends Disc implements Playable {
     private static int nbDigitalVideoDiscs = 0;
     private int id;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public float getCost() {
-        return cost;
-    }
 
     public DigitalVideoDisc(String title) {
         nbDigitalVideoDiscs++;
@@ -71,12 +45,15 @@ public class DigitalVideoDisc {
     }
 
     public boolean isMatch(String title) {
-        if (this.title.equals(title)) return true;
-        return false;
+        return this.title.equals(title);
     }
 
     public boolean isMatch(int id) {
-        if  (this.id == id) return true;
-        return false;
+        return (this.id == id);
+    }
+
+    public void play(){
+        System.out.println("Playing DVD: " + this.getTitle());
+        System.out.println("DVD length: " + this.getLength());
     }
 }
