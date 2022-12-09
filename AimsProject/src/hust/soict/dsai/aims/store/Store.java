@@ -21,6 +21,12 @@ public class Store {
         }
     }
 
+    public void addMedia(Media ...mediaList) {
+        for (Media media : mediaList){
+            this.addMedia(media);
+        }
+    }
+
     public void removeMedia(Media media) {
         if (this.itemsInStore.contains(media)){
             this.itemsInStore.remove(media);
@@ -30,4 +36,17 @@ public class Store {
         }
     }
 
+    public void printStore(){
+        for(Media media : itemsInStore){
+            System.out.println(media);
+        }
+    }
+
+    public Media searchStore(String title){
+        for (Media media : itemsInStore){
+            if (media.isMatch(title))
+                return media;
+        }
+        return null;
+    }
 }

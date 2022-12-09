@@ -1,6 +1,5 @@
 package hust.soict.dsai.aims.cart;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
 
 import java.util.*;
@@ -108,10 +107,35 @@ public class Cart {
 
     public void sortByTitleCost() {
         Collections.sort(this.itemsOrdered, COMPARE_BY_TITLE_COST);
-//        System.out.println("Sorted");
     }
 
     public void sortByCostTitle() {
         Collections.sort(this.itemsOrdered, COMPARE_BY_COST_TITLE);
+    }
+
+    public int getNumberOfItemsOrder(){
+        return this.itemsOrdered.size();
+    }
+
+    public Media getMedia(String title){
+        for (Media media : this.itemsOrdered){
+            if (media.isMatch(title)){
+                return media;
+            }
+        }
+        return null;
+    }
+
+    public Media getMedia(int id){
+        for (Media media : this.itemsOrdered){
+            if (media.isMatch(id)){
+                return media;
+            }
+        }
+        return null;
+    }
+
+    public void emptyCart(){
+        this.itemsOrdered.clear();
     }
 }
