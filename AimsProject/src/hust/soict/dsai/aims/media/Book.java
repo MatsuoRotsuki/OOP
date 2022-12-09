@@ -3,13 +3,17 @@ package hust.soict.dsai.aims.media;
 import java.util.*;
 
 public class Book extends Media{
+
+    private static int nbBooks = 0;
     private List<String> authors = new ArrayList<>();
 
     public Book(){
+        this.id = ++nbBooks;
     }
 
-    public Book(int id, String title, String category, float cost){
-        super(id, title, category, cost);
+    public Book(String title, String category, float cost){
+        super(title, category, cost);
+        this.id = ++nbBooks;
     }
 
     public List<String> getAuthors() {
@@ -36,5 +40,15 @@ public class Book extends Media{
         } else {
             System.out.println("The author is not present");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "authors=" + authors +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", cost=" + cost +
+                '}';
     }
 }

@@ -3,12 +3,16 @@ package hust.soict.dsai.aims.cart;
 import hust.soict.dsai.aims.disc.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
     private List<Media> itemsOrdered = new ArrayList<>();
+
+
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
+
     public void addMedia(Media media){
         if (this.itemsOrdered.size() >= MAX_NUMBERS_ORDERED){
             System.out.println("The cart is almost full");
@@ -66,17 +70,17 @@ public class Cart {
     }
 
     public void searchCart(int id) {
-        List<DigitalVideoDisc> result = new ArrayList<DigitalVideoDisc>();
+        List<Media> result = new ArrayList<>();
 
-        for (DigitalVideoDisc disc : this.itemsOrdered) {
-            if (disc.isMatch(id)) {
-                result.add(disc);
+        for (Media media : this.itemsOrdered) {
+            if (media.isMatch(id)) {
+                result.add(media);
             }
         }
         if (result.size() > 0) {
             System.out.println("Search results:");
-            for (DigitalVideoDisc disc: result) {
-                System.out.println(disc.toString());
+            for (Media media : result) {
+                System.out.println(media.toString());
             }
             System.out.println();
         } else {
@@ -85,21 +89,30 @@ public class Cart {
     }
 
     public void searchCart(String title) {
-        List<DigitalVideoDisc> result = new ArrayList<DigitalVideoDisc>();
+        List<Media> result = new ArrayList<>();
 
-        for (DigitalVideoDisc disc : this.itemsOrdered) {
-            if (disc.isMatch(title)) {
-                result.add(disc);
+        for (Media media : this.itemsOrdered) {
+            if (media.isMatch(title)) {
+                result.add(media);
             }
         }
         if (result.size() > 0) {
             System.out.println("Search results:");
-            for (DigitalVideoDisc disc: result) {
-                System.out.println(disc.toString());
+            for (Media media: result) {
+                System.out.println(media.toString());
             }
             System.out.println();
         } else {
             System.out.println("Item not found.");
         }
+    }
+
+    public void sortByTitleCost() {
+        Collections.sort(this.itemsOrdered, COMPARE_BY_TITLE_COST);
+//        System.out.println("Sorted");
+    }
+
+    public void sortByCostTitle() {
+        Collections.sort(this.itemsOrdered, COMPARE_BY_COST_TITLE);
     }
 }

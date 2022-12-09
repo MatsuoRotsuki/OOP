@@ -1,6 +1,5 @@
 package hust.soict.dsai.aims.store;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
 
 import java.util.ArrayList;
@@ -14,12 +13,21 @@ public class Store {
     }
     
     public void addMedia(Media media) {
-        this.itemsInStore.add(media);
-        System.out.println("Added item into the store successfully");
+        if (this.itemsInStore.contains(media)){
+
+        }else {
+            this.itemsInStore.add(media);
+            System.out.println("Added item into the store successfully");
+        }
     }
 
     public void removeMedia(Media media) {
-        this.itemsInStore.remove(media);
-        System.out.println("Removed item from the store successfully");
+        if (this.itemsInStore.contains(media)){
+            this.itemsInStore.remove(media);
+            System.out.println("Removed item from the store successfully");
+        } else {
+            System.out.println("Item not found");
+        }
     }
+
 }

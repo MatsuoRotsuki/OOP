@@ -51,11 +51,18 @@ public abstract class Media {
     public Media(){
     }
 
-    public Media(int id, String title, String category, float cost){
-        this.id = id;
+    public Media(String title, String category, float cost){
         this.title = title;
         this.category = category;
         this.cost = cost;
+    }
+
+    public boolean isMatch(String title) {
+        return this.title.equals(title);
+    }
+
+    public boolean isMatch(int id) {
+        return (this.id == id);
     }
 
     @Override

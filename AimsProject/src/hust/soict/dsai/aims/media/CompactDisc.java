@@ -3,6 +3,8 @@ package hust.soict.dsai.aims.media;
 import java.util.*;
 
 public class CompactDisc extends Disc implements Playable{
+
+    private static int nbCompactDiscs = 0;
     private String artist;
     List<Track> tracks = new ArrayList<>();
 
@@ -38,5 +40,34 @@ public class CompactDisc extends Disc implements Playable{
             sum += track.getLength();
         }
         return sum;
+    }
+
+    public CompactDisc(){
+        this.id = ++nbCompactDiscs;
+    }
+
+    public CompactDisc(String director, String artist) {
+        super(director);
+        this.id = ++nbCompactDiscs;
+        this.artist = artist;
+    }
+
+    public CompactDisc(int length, String director, String artist) {
+        super(length, director);
+        this.id = ++nbCompactDiscs;
+        this.artist = artist;
+    }
+
+    @Override
+    public String toString() {
+        return "CompactDisc{" +
+                "artist='" + artist + '\'' +
+                ", tracks=" + tracks +
+                ", length=" + length +
+                ", director='" + director + '\'' +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", cost=" + cost +
+                '}';
     }
 }

@@ -5,9 +5,9 @@ import hust.soict.dsai.aims.media.Playable;
 
 public class DigitalVideoDisc extends Disc implements Playable {
     private static int nbDigitalVideoDiscs = 0;
-    private int id;
 
     public DigitalVideoDisc(String title) {
+        super();
         nbDigitalVideoDiscs++;
         this.id = nbDigitalVideoDiscs;
         this.title = title;
@@ -22,34 +22,32 @@ public class DigitalVideoDisc extends Disc implements Playable {
     }
 
     public DigitalVideoDisc(String title, String category, String director, float cost) {
+        super(director);
         nbDigitalVideoDiscs++;
         this.id = nbDigitalVideoDiscs;
         this.title = title;
         this.category = category;
-        this.director = director;
         this.cost = cost;
     }
 
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
+        super(length, director);
         nbDigitalVideoDiscs++;
         this.id = nbDigitalVideoDiscs;
         this.title = title;
         this.category = category;
-        this.director = director;
-        this.length = length;
         this.cost = cost;
     }
 
+    @Override
     public String toString() {
-        return this.id + ". DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getLength() + ": " + this.getCost() + "$";
-    }
-
-    public boolean isMatch(String title) {
-        return this.title.equals(title);
-    }
-
-    public boolean isMatch(int id) {
-        return (this.id == id);
+        return "DigitalVideoDisc{" +
+                "length=" + length +
+                ", director='" + director + '\'' +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", cost=" + cost +
+                '}';
     }
 
     public void play(){
