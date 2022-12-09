@@ -32,7 +32,7 @@ public class Cart {
         }
     }
 
-    public void addDigitalVideoDisc(Media media1, Media media2) {
+    public void addMedia(Media media1, Media media2) {
         if (itemsOrdered.size() <= MAX_NUMBERS_ORDERED - 2) {
             System.out.println("Cannot add because there's no space");
         } else {
@@ -41,10 +41,9 @@ public class Cart {
         }
     }
 
-    public void removeDigitalVideoDisc(DigitalVideoDisc disc){
-        int index = this.itemsOrdered.indexOf(disc);
-        if (index >= 0){
-            this.itemsOrdered.remove(disc);
+    public void removeMedia(Media media){
+        if (this.itemsOrdered.contains(media)){
+            this.itemsOrdered.remove(media);
             System.out.println("Item removed successfully");
         } else {
             System.out.println("Item not found");
