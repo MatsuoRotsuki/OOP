@@ -16,7 +16,5 @@ public class CartTest {
         cart.addMedia(dvd3);
 
         cart.printCart();
-        cart.searchCart("Aladin");
-        cart.searchCart(4);
     }
 }
