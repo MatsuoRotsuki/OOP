@@ -11,6 +11,10 @@ public class Store {
     public Store() {
 
     }
+
+    public List<Media> getItemsInStore(){
+        return this.itemsInStore;
+    }
     
     public void addMedia(Media media) {
         if (this.itemsInStore.contains(media)){
