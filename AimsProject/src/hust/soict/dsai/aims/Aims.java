@@ -2,6 +2,7 @@ package hust.soict.dsai.aims;
 
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.Media;
@@ -107,10 +108,14 @@ public class Aims {
                 if (foundMedia != null){
                     if (foundMedia instanceof CompactDisc){
                         CompactDisc cd = (CompactDisc) foundMedia;
-                        cd.play();
+                        try{cd.play();}catch (PlayerException e){
+                            e.printStackTrace();
+                        }
                     } else if (foundMedia instanceof DigitalVideoDisc){
                         DigitalVideoDisc dvd = (DigitalVideoDisc) foundMedia;
-                        dvd.play();
+                        try{dvd.play();}catch (PlayerException e){
+                            e.printStackTrace();
+                        }
                     }
                 } else {
                     System.out.println("Media not found");
@@ -139,10 +144,10 @@ public class Aims {
             } else if(command == 2) {
                 if (media instanceof CompactDisc){
                     CompactDisc cd = (CompactDisc) media;
-                    cd.play();
+                    try{cd.play();}catch (PlayerException e){e.printStackTrace();}
                 } else if (media instanceof DigitalVideoDisc){
                     DigitalVideoDisc dvd = (DigitalVideoDisc) media;
-                    dvd.play();
+                    try{dvd.play();}catch (PlayerException e){e.printStackTrace();}
                 }
             }
         }
@@ -201,10 +206,10 @@ public class Aims {
                 if (foundMedia != null){
                     if (foundMedia instanceof CompactDisc){
                         CompactDisc cd = (CompactDisc) foundMedia;
-                        cd.play();
+                        try{cd.play();}catch (PlayerException e){e.printStackTrace();}
                     } else if (foundMedia instanceof DigitalVideoDisc){
                         DigitalVideoDisc dvd = (DigitalVideoDisc) foundMedia;
-                        dvd.play();
+                        try{dvd.play();}catch (PlayerException e){e.printStackTrace();}
                     }
                 } else {
                     System.out.println("Media not found");
