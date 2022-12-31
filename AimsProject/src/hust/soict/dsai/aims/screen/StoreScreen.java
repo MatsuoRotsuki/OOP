@@ -6,6 +6,8 @@ import hust.soict.dsai.aims.store.Store;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class StoreScreen extends JFrame {
@@ -47,6 +49,14 @@ public class StoreScreen extends JFrame {
         title.setForeground(Color.CYAN);
 
         JButton cart = new JButton("View cart");
+        cart.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        new CartScreen(StoreScreen.this.cart);
+                    }
+                }
+        );
         cart.setPreferredSize(new Dimension(100,50));
         cart.setMaximumSize(new Dimension(100, 50));
 

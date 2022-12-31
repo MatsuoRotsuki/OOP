@@ -3,13 +3,16 @@ package hust.soict.dsai.aims.screen;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.awt.event.ActionEvent;
+import javax.swing.*;
 
 public class CartScreenController {
     private Cart cart;
@@ -47,12 +50,6 @@ public class CartScreenController {
     private Button btnRemove;
 
     @FXML
-    void btnRemovePressed(ActionEvent event){
-        Media media = tblMedia.getSelectionModel().getSelectedItem();
-        cart.removeMedia(media);
-    }
-
-    @FXML
     private void initialize() {
         colMediaTitle.setCellValueFactory(
                 new PropertyValueFactory<Media, String>("title")
@@ -85,6 +82,26 @@ public class CartScreenController {
                 showFilteredMedia(newValue);
             }
         });
+
+        tblMedia.getItems().addListener(
+                new ListChangeListener<Media>() {
+                    @Override
+                    public void onChanged(Change<? extends Media> change) {
+                        updateTotalCost();
+                    }
+                }
+        );
+    }
+
+    void updateTotalCost(){
+        Platform.runLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        totalCostLabel.setText(String.format("%.2f", cart.totalCost())+ " $");
+                    }
+                }
+        );
     }
 
     void showFilteredMedia(String string){
@@ -104,4 +121,19 @@ public class CartScreenController {
             btnPlay.setVisible(false);
         }
     }
+
+    @FXML
+    void btnRemovePressed(ActionEvent event){
+        Media media = tblMedia.getSelectionModel().getSelectedItem();
+        cart.removeMedia(media);
+    }
+
+    @FXML
+    void onPlaceOrder(ActionEvent event){
+        JOptionPane.showMessageDialog(null, "An Order is created", "Cart", JOptionPane.INFORMATION_MESSAGE);
+        cart.emptyCart();
+    }
+
+    @FXML
+    private Label totalCostLabel;
 }

@@ -1,8 +1,10 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 import java.util.*;
 
-public class CompactDisc extends Disc implements Playable{
+public class CompactDisc extends Disc implements Playable {
 
     private static int nbCompactDiscs = 0;
     private String artist;
@@ -30,8 +32,10 @@ public class CompactDisc extends Disc implements Playable{
         }
     }
 
-    public void play(){
-        tracks.forEach((track -> {track.play();}));
+    public void play() throws PlayerException {
+        for(Track track : tracks){
+            track.play();
+        }
     }
 
     public int getLength(){

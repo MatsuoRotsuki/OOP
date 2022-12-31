@@ -1,8 +1,10 @@
 package hust.soict.dsai.aims.screen;
 
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
+import javafx.scene.layout.VBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,7 +54,16 @@ public class MediaStore extends JPanel {
             if (button.equals("Play")){
                 if (media instanceof Playable){
                     ((Playable) media).play();
-                    JDialog dialog = new JDialog();
+                    //JOptionPane.showMessageDialog(null, toShow, "Playing Disk", JOptionPane.INFORMATION_MESSAGE);
+                    //String[] lines = toShow.split("\\r?\\n|\\r");
+
+                    for (String str : lines){
+                        System.out.println(str);
+                        JLabel l = new JLabel(str);
+                        d.add(l);
+                    }
+                    d.setSize(400, 400);
+                    d.setVisible(true);
                 }
             } else if(button.equals("Add to cart")){
                 cart.addMedia(media);
