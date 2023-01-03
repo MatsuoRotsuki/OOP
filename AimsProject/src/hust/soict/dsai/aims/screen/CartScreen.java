@@ -10,19 +10,24 @@ import javafx.scene.Scene;
 import javax.swing.*;
 import java.io.IOException;
 
-public class CartScreen extends JFrame {
-    private Cart cart;
+public class CartScreen extends AimsScreen {
+
+    @Override
+    JPanel createCenter() {
+        return null;
+    }
 
     public CartScreen(Cart cart){
         super();
-
+        setCartScreen(this);
+        setCurrentScreen(this);
         this.cart = cart;
 
         JFXPanel fxPanel = new JFXPanel();
         this.add(fxPanel);
-
+        this.setSize(1024,768);
         this.setTitle("Cart");
-        this.setVisible(true);
+        this.setVisible(false);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -42,21 +47,3 @@ public class CartScreen extends JFrame {
     }
 }
 
-//public class CartScreen extends Application {
-//    @Override
-//    public void start(Stage stage) throws Exception {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hust/soict/dsai/aims/screen/fxml/cart.fxml"));
-//        Cart cart = new Cart();
-//        CartScreenController controller = new CartScreenController(cart);
-//        loader.setController(controller);
-//        Parent root = loader.load();
-//        Scene scene = new Scene(root);
-//        stage.setTitle("Cart");
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-//
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-//}

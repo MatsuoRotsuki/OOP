@@ -6,10 +6,10 @@ import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.Media;
-import hust.soict.dsai.aims.screen.CartScreen;
-import hust.soict.dsai.aims.screen.StoreScreen;
 import hust.soict.dsai.aims.store.Store;
 
+import javax.swing.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class Aims {
@@ -248,19 +248,16 @@ public class Aims {
         );
         CompactDisc cd = new CompactDisc(
                 "Vo Tac Thien",
-                50,
                 "Loc",
                 "Loc"
         );
         CompactDisc cd2 = new CompactDisc(
                 "Khuong Tu Nha",
-                40,
                 "Loc",
                 "Loc"
         );
         CompactDisc cd3 = new CompactDisc(
                 "Tan Thuy Hoang",
-                45,
                 "Tu Ma Thien",
                 "Han Wudi"
         );
@@ -274,10 +271,16 @@ public class Aims {
         DigitalVideoDisc dvd5 = new DigitalVideoDisc(
                 "Avatar 2",
                 "Sci-fi",
-                "James Cameroon",
-                30f
+                30f,
+                "James Cameroon"
         );
-        store.addMedia(dvd1, dvd2, dvd3, book, cd, cd2, cd3, dvd4, dvd5);
-        new StoreScreen(store);
+
+        DigitalVideoDisc dvd6 = new DigitalVideoDisc(
+                "Avatar 3",
+                "sci-fi",
+                40f,
+                "James Cameroon"
+        );
+        store.addMedia(dvd1, dvd2, dvd3, book, cd, cd2, cd3, dvd4);
     }
 }

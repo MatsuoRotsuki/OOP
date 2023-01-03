@@ -53,17 +53,11 @@ public class MediaStore extends JPanel {
             String button = e.getActionCommand();
             if (button.equals("Play")){
                 if (media instanceof Playable){
-                    ((Playable) media).play();
-                    //JOptionPane.showMessageDialog(null, toShow, "Playing Disk", JOptionPane.INFORMATION_MESSAGE);
-                    //String[] lines = toShow.split("\\r?\\n|\\r");
-
-                    for (String str : lines){
-                        System.out.println(str);
-                        JLabel l = new JLabel(str);
-                        d.add(l);
+                    try{
+                        ((Playable) media).play();
+                    } catch (PlayerException exception){
+                        exception.printStackTrace();
                     }
-                    d.setSize(400, 400);
-                    d.setVisible(true);
                 }
             } else if(button.equals("Add to cart")){
                 cart.addMedia(media);

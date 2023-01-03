@@ -1,18 +1,20 @@
 package hust.soict.dsai.aims.store;
 
 import hust.soict.dsai.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    private List<Media> itemsInStore = new ArrayList<>();
+    private ObservableList<Media> itemsInStore = FXCollections.observableArrayList();
 
     public Store() {
 
     }
 
-    public List<Media> getItemsInStore(){
+    public ObservableList<Media> getItemsInStore(){
         return this.itemsInStore;
     }
     
@@ -52,5 +54,9 @@ public class Store {
                 return media;
         }
         return null;
+    }
+
+    public boolean contains(Media media){
+        return this.itemsInStore.contains(media);
     }
 }

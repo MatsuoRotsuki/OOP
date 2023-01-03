@@ -1,6 +1,7 @@
 package hust.soict.dsai.aims.screen;
 
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import javafx.application.Platform;
@@ -10,12 +11,22 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class CartScreenController {
     private Cart cart;
+
+    private Frame storeScreen;
+    private Frame currentScreen;
+    private Frame addBookScreen;
+    private Frame addCDScreen;
+    private Frame addDVDScreen;
 
     @FXML
     private TextField tfFilter;
@@ -38,9 +49,33 @@ public class CartScreenController {
     @FXML
     private TableColumn<Media, String> colMediaCost;
 
+    @FXML
+    void onClickPlayBtn(ActionEvent event){
+        Media selectedMedia = tblMedia.getSelectionModel().getSelectedItem();
+        if (selectedMedia instanceof Playable){
+            try {
+                ((Playable) selectedMedia).play();
+            } catch (PlayerException exception){
+                exception.printStackTrace();
+            }
+        }
+    }
+
     public CartScreenController(Cart cart){
         super();
         this.cart = cart;
+        for (Frame frame : Frame.getFrames()){
+            if (frame.getTitle().equals("Add Book Screen"))
+                addBookScreen = frame;
+            else if (frame.getTitle().equals("Add CD Screen"))
+                addCDScreen = frame;
+            else if (frame.getTitle().equals("Add DVD Screen"))
+                addDVDScreen = frame;
+            else if (frame.getTitle().equals("Store"))
+                storeScreen = frame;
+            else if (frame.getTitle().equals("Cart"))
+                currentScreen = frame;
+        }
     }
 
     @FXML
@@ -136,4 +171,33 @@ public class CartScreenController {
 
     @FXML
     private Label totalCostLabel;
+
+    @FXML
+    void onClickAddBook(){
+        currentScreen.setVisible(false);
+        addBookScreen.setVisible(true);
+    }
+
+    @FXML
+    void onClickAddCD(){
+        currentScreen.setVisible(false);
+        addCDScreen.setVisible(true);
+    }
+
+    @FXML
+    void onClickAddDVD(){
+        currentScreen.setVisible(false);
+        addDVDScreen.setVisible(true);
+    }
+
+    @FXML
+    void onClickViewStore(){
+        currentScreen.setVisible(false);
+        storeScreen.setVisible(true);
+    }
+
+    @FXML
+    void onClickViewCart(){
+        //do nothing
+    }
 }
