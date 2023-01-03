@@ -114,7 +114,11 @@ public class CartScreenController {
         tfFilter.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                showFilteredMedia(newValue);
+                if (newValue.length() == 0){
+                    tblMedia.setItems(cart.getItemsOrdered());
+                } else {
+                    showFilteredMedia(newValue);
+                }
             }
         });
 
@@ -141,7 +145,11 @@ public class CartScreenController {
 
     void showFilteredMedia(String string){
         if (radioBtnFilterId.isSelected()){
-            tblMedia.setItems(this.cart.searchCart(Integer.parseInt(string)));
+            try {
+                tblMedia.setItems(this.cart.searchCart(Integer.parseInt(string)));
+            } catch (NumberFormatException exception){
+                System.err.println("You must enter an ID number of an item");
+            }
         } else if (radioBtnFilterTitle.isSelected()){
             tblMedia.setItems(this.cart.searchCart(string));
         }
@@ -174,30 +182,41 @@ public class CartScreenController {
 
     @FXML
     void onClickAddBook(){
+        closeOtherScreens();
         currentScreen.setVisible(false);
         addBookScreen.setVisible(true);
     }
 
     @FXML
     void onClickAddCD(){
+        closeOtherScreens();
         currentScreen.setVisible(false);
         addCDScreen.setVisible(true);
     }
 
     @FXML
     void onClickAddDVD(){
+        closeOtherScreens();
         currentScreen.setVisible(false);
         addDVDScreen.setVisible(true);
     }
 
     @FXML
     void onClickViewStore(){
+        closeOtherScreens();
         currentScreen.setVisible(false);
         storeScreen.setVisible(true);
     }
 
+    public void closeOtherScreens(){
+        for (Frame frame : Frame.getFrames()){
+            if (!frame.equals(currentScreen))
+                frame.setVisible(false);
+        }
+    }
+
     @FXML
     void onClickViewCart(){
-        //do nothing
+        closeOtherScreens();
     }
 }
