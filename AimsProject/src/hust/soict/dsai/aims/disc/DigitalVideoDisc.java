@@ -24,7 +24,7 @@ public class DigitalVideoDisc extends Disc implements Playable {
         this.cost = cost;
     }
 
-    public DigitalVideoDisc(String title, String category, String director, float cost) {
+    public DigitalVideoDisc(String title, String category, float cost, String director) {
         super(director);
         nbDigitalVideoDiscs++;
         this.id = nbDigitalVideoDiscs;
@@ -34,9 +34,10 @@ public class DigitalVideoDisc extends Disc implements Playable {
     }
 
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        super(length, director);
+        super(director);
         nbDigitalVideoDiscs++;
         this.id = nbDigitalVideoDiscs;
+        this.length = length;
         this.title = title;
         this.category = category;
         this.cost = cost;

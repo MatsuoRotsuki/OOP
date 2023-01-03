@@ -3,6 +3,7 @@ package hust.soict.dsai.aims.screen;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.store.Store;
+import javafx.collections.ListChangeListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,65 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class StoreScreen extends JFrame {
-    private Store store;
-    private Cart cart = new Cart();
-    JPanel createNorth() {
-        JPanel north = new JPanel();
-        north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-        north.add(createMenuBar());
-        north.add(createHeader());
-        return north;
-    }
+public class StoreScreen extends AimsScreen {
 
-    JMenuBar createMenuBar() {
-        JMenu menu = new JMenu("Options");
-
-        JMenu smUpdateStore = new JMenu("Update Store");
-        smUpdateStore.add(new JMenuItem("Add Book"));
-        smUpdateStore.add(new JMenuItem("Add CD"));
-        smUpdateStore.add(new JMenuItem("Add DVD"));
-
-        menu.add(smUpdateStore);
-        menu.add(new JMenuItem("View Store"));
-        menu.add(new JMenuItem("View Cart"));
-
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
-        menuBar.add(menu);
-
-        return menuBar;
-    }
-
-    JPanel createHeader() {
-        JPanel header = new JPanel();
-        header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
-
-        JLabel title = new JLabel("AIMS");
-        title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 50));
-        title.setForeground(Color.CYAN);
-
-        JButton cart = new JButton("View cart");
-        cart.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        new CartScreen(StoreScreen.this.cart);
-                    }
-                }
-        );
-        cart.setPreferredSize(new Dimension(100,50));
-        cart.setMaximumSize(new Dimension(100, 50));
-
-        header.add(Box.createRigidArea(new Dimension(10, 10)));
-        header.add(title);
-        header.add(Box.createHorizontalGlue());
-        header.add(cart);
-        header.add(Box.createRigidArea(new Dimension(10, 10)));
-
-        return header;
-    }
-
+    @Override
     JPanel createCenter(){
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(3,3,2,2));
@@ -82,8 +27,10 @@ public class StoreScreen extends JFrame {
         return center;
     }
 
-    public StoreScreen(Store store){
-        this.store = store;
+    public StoreScreen(Store store, Cart cart){
+        super(store, cart);
+        setCurrentScreen(this);
+        setStoreScreen(this);
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
 
@@ -93,5 +40,18 @@ public class StoreScreen extends JFrame {
         setVisible(true);
         setTitle("Store");
         setSize(1024, 768);
+
+        store.getItemsInStore().addListener(
+                new ListChangeListener<Media>() {
+                    @Override
+                    public void onChanged(Change<? extends Media> change) {
+                        BorderLayout layout = (BorderLayout)cp.getLayout();
+                        cp.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+                        cp.add(createCenter(),BorderLayout.CENTER);
+                        cp.repaint();
+                        cp.revalidate();
+                    }
+                }
+        );
     }
 }

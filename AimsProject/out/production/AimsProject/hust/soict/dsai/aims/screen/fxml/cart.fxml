@@ -27,13 +27,13 @@
                   <items>
                         <Menu mnemonicParsing="false" text="Update Store">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Add Book" />
-                              <MenuItem mnemonicParsing="false" text="Add CD" />
-                              <MenuItem mnemonicParsing="false" text="Add DVD" />
+                            <MenuItem mnemonicParsing="false" onAction="#onClickAddBook" text="Add Book" />
+                              <MenuItem mnemonicParsing="false" onAction="#onClickAddCD" text="Add CD" />
+                              <MenuItem mnemonicParsing="false" onAction="#onClickAddDVD" text="Add DVD" />
                           </items>
                         </Menu>
-                        <MenuItem mnemonicParsing="false" text="View Store" />
-                        <MenuItem mnemonicParsing="false" text="View Cart" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickViewStore" text="View Store" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickViewCart" text="View Cart" />
                   </items>
                 </Menu>
               </menus>
@@ -79,7 +79,7 @@
             </TableView>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button fx:id="btnPlay" mnemonicParsing="false" text="Play" />
+                <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#onClickPlayBtn" text="Play" />
                   <Button fx:id="btnRemove" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove" />
               </buttons>
             </ButtonBar>
