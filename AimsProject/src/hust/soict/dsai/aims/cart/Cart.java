@@ -1,10 +1,12 @@
 package hust.soict.dsai.aims.cart;
 
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Media;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import javax.naming.LimitExceededException;
 import java.util.*;
 
 public class Cart {
@@ -17,31 +19,39 @@ public class Cart {
         return itemsOrdered;
     }
 
-    public void addMedia(Media media){
+    public void addMedia(Media media) throws LimitExceededException {
         if (this.itemsOrdered.size() >= MAX_NUMBERS_ORDERED){
-            System.out.println("The cart is almost full");
+            throw new LimitExceededException("ERROR: The number of media has reached its limit");
         } else {
             System.out.println("Add disc into the cart successfully");
             this.itemsOrdered.add(media);
         }
     }
 
-    public void addMedia(Media ...mediaList){
+    public void addMedia(Media ...mediaList) throws LimitExceededException{
         if (itemsOrdered.size() + mediaList.length >= MAX_NUMBERS_ORDERED){
-            System.out.println("Cannot add because there's no space");
+            throw new LimitExceededException("ERROR: Cannot add because there's no space");
         } else {
-            for (Media media : mediaList){
-                this.addMedia(media);
+            try {
+                for (Media media : mediaList){
+                    this.addMedia(media);
+                }
+            } catch(LimitExceededException e){
+                throw e;
             }
         }
     }
 
-    public void addMedia(Media media1, Media media2) {
-        if (itemsOrdered.size() <= MAX_NUMBERS_ORDERED - 2) {
-            System.out.println("Cannot add because there's no space");
+    public void addMedia(Media media1, Media media2) throws LimitExceededException {
+        if (itemsOrdered.size() >= MAX_NUMBERS_ORDERED - 2) {
+            throw new LimitExceededException("ERROR: Cannot add because there's no space");
         } else {
-            this.addMedia(media1);
-            this.addMedia(media2);
+            try{
+                this.addMedia(media1);
+                this.addMedia(media2);
+            } catch (LimitExceededException e){
+                throw e;
+            }
         }
     }
 

@@ -30,12 +30,13 @@ public class Track implements Playable {
         if(this.getLength() > 0){
             System.out.println("Playing DVD: " + this.getTitle());
             System.out.println("DVD length: " + this.getLength());
-            JFrame f = new JFrame();
-            f.setSize(400, 400);
+            Frame f = new Frame();
+            f.setSize(400, 200);
             JDialog d = new JDialog(f, "Playing disc...");
             d.setLayout(new FlowLayout());
-            d.add(new JLabel("Playing DVD: " + this.getTitle()));
-            d.add(new JLabel("DVD length: " + this.getLength()));
+            d.add(new JLabel("<html>Playing DVD: " + this.getTitle()+"<br/>DVD Length: " + this.getLength() + "<html>"));
+            d.setSize(400, 200);
+            d.setVisible(true);
         }
         else {
             throw new PlayerException("ERROR: DVD length is non-positive!");

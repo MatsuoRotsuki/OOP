@@ -8,6 +8,7 @@ import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.store.Store;
 
+import javax.naming.LimitExceededException;
 import javax.swing.*;
 import java.util.List;
 import java.util.Scanner;
@@ -94,8 +95,12 @@ public class Aims {
                 String targetTitle = input.next();
                 Media foundMedia = store.searchStore(targetTitle);
                 if (foundMedia != null){
-                    cart.addMedia(foundMedia);
-                    System.out.println("Number of items in current cart: " + cart.getNumberOfItemsOrder());
+                    try {
+                        cart.addMedia(foundMedia);
+                        System.out.println("Number of items in current cart: " + cart.getNumberOfItemsOrder());
+                    } catch (LimitExceededException e){
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("Media not found");
                 }
@@ -140,7 +145,11 @@ public class Aims {
             if (command == 0){
                 return;
             } else if(command == 1){
-                cart.addMedia(media);
+                try {
+                    cart.addMedia(media);
+                } catch (LimitExceededException e){
+                    e.printStackTrace();
+                }
             } else if(command == 2) {
                 if (media instanceof CompactDisc){
                     CompactDisc cd = (CompactDisc) media;

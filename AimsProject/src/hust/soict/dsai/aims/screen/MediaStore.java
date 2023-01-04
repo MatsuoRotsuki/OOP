@@ -6,6 +6,7 @@ import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import javafx.scene.layout.VBox;
 
+import javax.naming.LimitExceededException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -60,7 +61,11 @@ public class MediaStore extends JPanel {
                     }
                 }
             } else if(button.equals("Add to cart")){
-                cart.addMedia(media);
+                try {
+                    cart.addMedia(media);
+                } catch(LimitExceededException exception){
+                    exception.printStackTrace();
+                }
             }
         }
     }
